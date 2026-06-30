@@ -2,15 +2,15 @@ import { ConfluencePage } from '../confluence/types';
 
 const store = new Map<string, ConfluencePage>();
 
-export function upsert(page: ConfluencePage): void {
+export async function upsert(page: ConfluencePage): Promise<void> {
   store.set(page.id, page);
 }
 
-export function findBySpace(spaceId: string): ConfluencePage[] {
+export async function findBySpace(spaceId: string): Promise<ConfluencePage[]> {
   return Array.from(store.values()).filter((p) => p.spaceId === spaceId);
 }
 
-export function findLastModified(limit = 10): ConfluencePage[] {
+export async function findLastModified(limit = 10): Promise<ConfluencePage[]> {
   return Array.from(store.values())
     .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
     .slice(0, limit);

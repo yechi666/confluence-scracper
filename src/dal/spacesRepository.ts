@@ -2,10 +2,10 @@ import { ConfluenceSpace } from '../confluence/types';
 
 const store = new Map<string, ConfluenceSpace>();
 
-export function upsert(space: ConfluenceSpace): void {
+export async function upsert(space: ConfluenceSpace): Promise<void> {
   store.set(space.id, space);
 }
 
-export function findAll(): ConfluenceSpace[] {
+export async function findAll(): Promise<ConfluenceSpace[]> {
   return Array.from(store.values());
 }

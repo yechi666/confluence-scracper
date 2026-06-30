@@ -6,10 +6,10 @@ interface StoredAttachment extends ConfluenceAttachment {
 
 const store = new Map<string, StoredAttachment>();
 
-export function upsert(attachment: ConfluenceAttachment, filePath?: string): void {
+export async function upsert(attachment: ConfluenceAttachment, filePath?: string): Promise<void> {
   store.set(attachment.id, { ...attachment, filePath });
 }
 
-export function findByPage(pageId: string): StoredAttachment[] {
+export async function findByPage(pageId: string): Promise<StoredAttachment[]> {
   return Array.from(store.values()).filter((a) => a.pageId === pageId);
 }
