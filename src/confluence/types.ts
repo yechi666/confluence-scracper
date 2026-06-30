@@ -1,6 +1,3 @@
-// Domain types — what we store and work with internally.
-// The Confluence client maps raw API responses onto these.
-
 export interface ConfluenceSpace {
   id: string;
   key: string;
@@ -16,14 +13,14 @@ export interface ConfluenceSpace {
 export interface ConfluencePage {
   id: string;
   spaceId: string;
-  parentId: string | null; // null for root pages
+  parentId: string | null;
   title: string;
   status: string;
-  body: string;      // extracted from body.storage.value
-  version: number;   // extracted from version.number
+  body: string;
+  version: number;
   authorId: string;
   createdAt: string;
-  updatedAt: string; // extracted from version.createdAt
+  updatedAt: string;
 }
 
 export interface ConfluenceAttachment {
@@ -32,14 +29,6 @@ export interface ConfluenceAttachment {
   title: string;
   mediaType: string;
   fileSize: number;
-  downloadLink: string; // relative path, e.g. /rest/api/content/.../download
+  downloadLink: string;
   createdAt: string;
-}
-
-export interface PaginatedResult<T> {
-  results: T[];
-  _links: {
-    next?: string; // absent on the last page
-    base: string;
-  };
 }
